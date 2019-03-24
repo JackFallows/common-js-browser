@@ -1,8 +1,10 @@
 window.initialiseRequire = function (moduleSource, scope) {
-    (scope || window).require = async function (module) {
-        const modules = {};
+    scope = scope || window;
+    
+    scope.modules = {};
 
-        let source = modules[module] || null;
+    scope.require = async function (module) {
+        let source = scope.modules[module] || null;
 
         if (source == null) {
             if (typeof moduleSource === "string") {
@@ -11,7 +13,7 @@ window.initialiseRequire = function (moduleSource, scope) {
                 source = { source: await moduleSource(module), loaded: false, module: null };
             }
 
-            modules[module] = source;
+            scope.modules[module] = source;
         }
 
         if (!source.loaded) {
@@ -35,6 +37,7 @@ window.initialiseRequire = function (moduleSource, scope) {
             });
             
             source.module = window.module.exports;
+            source.loaded = true;
             window.module.exports = null;
             
             return source.module;
