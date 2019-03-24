@@ -1,2 +1,2 @@
 # common-js-browser
-CommonJS (Node) style AMD in the browser
+CommonJS (Node) style module loader for the browser.
