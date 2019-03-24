@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <script src="../common-js-browser.js"></script>
+</head>
+<body>
+<script>
+    initialiseRequire(".");
+    
+    async function start() {
+        const message = await require("message");
+        
+        const write = await require("write-to-console");
+        
+        write(message);
+    }
+    
+    start();
+</script>
+</body>
+</html>
